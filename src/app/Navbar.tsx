@@ -18,6 +18,9 @@ import ConnectWithoutContactRoundedIcon from '@mui/icons-material/ConnectWithout
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import Tooltip from '@mui/material/Tooltip';
 
 export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
@@ -50,26 +53,43 @@ export default function Navbar() {
           
         
         />
-        Fin-Financials
+        
       </FormGroup>
       <AppBar position="static"  >
+      Fin-Financials
         <Toolbar>
-          
+          <Tooltip title= "Side bar">
+        <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              </Tooltip>
           
           <Typography fontSize={14}  component="div" >
-            Help <IconButton
+          <Tooltip title="Help" arrow className='text-blue'>
+            <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-          >
+          >         
             <HelpOutlineRoundedIcon />
+            
           </IconButton>
           
+          </Tooltip>
+        
           </Typography>
           <Typography fontSize={14} component="div" >
-            Contact us
+            <Tooltip title= "Contact us" arrow className= "text-blue">
+      
           <IconButton
             size="large"
             edge="start"
@@ -79,10 +99,13 @@ export default function Navbar() {
           >
             <ConnectWithoutContactRoundedIcon/>
           </IconButton>
+          </Tooltip>
           
           </Typography>
           <Typography fontSize={14} component="div" >
-            About <IconButton
+            <Tooltip title= "About" arrow className= "text-blue">
+
+            <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -91,10 +114,11 @@ export default function Navbar() {
           >
             <InfoRoundedIcon />
           </IconButton>
+          </Tooltip>
           
           </Typography>
           <Typography  fontSize ={14} component="div" >
-            Change Password
+            <Tooltip title= "Change password" arrow className= "text-blue">
           <IconButton
             size="large"
             edge="start"
@@ -104,6 +128,7 @@ export default function Navbar() {
           >
             <ManageAccountsRoundedIcon />
           </IconButton>
+          </Tooltip>
           
           </Typography>
           
@@ -137,42 +162,13 @@ export default function Navbar() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Dashboard</MenuItem>
                 <MenuItem onClick={handleClose}>Log out</MenuItem>
               </Menu>
             </div>
           )}
         </Toolbar>
 
-       
       </AppBar>
-      <div>
-        <TextField
-          label="Current User"
-          id="outlined-size-small"
-          defaultValue="jane"
-          size="small"
-        />
-        <TextField
-          label="Date"
-          id="outlined-size-small"
-          defaultValue="2/10/2023"
-        
-          size="small"
-        />
-        <TextField
-          label="Institution"
-          id="outlined-size-small"
-          defaultValue="Fintech"
-          size="small"
-        />
-        <TextField
-          label="Branch details"
-          id="outlined-size-small"
-          defaultValue="Town"
-          size="small"
-        />
-        </div>
 
     </Box>
   );
