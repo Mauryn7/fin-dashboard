@@ -29,6 +29,17 @@ const SideBar = () => {
     const { collapseSidebar, toggleSidebar, collapsed, toggled, broken } = useProSidebar();
     const [value, setValue] = useState(0);
     const iconClass = "text-black"
+    const submenustyle = {
+ 
+      color: '#1F5780',
+      '&:hover': {
+        backgroundColor: '#1F5780',
+      },
+  
+      // ['.' + menuClasses.subMenuContent]: {
+      //   backgroundColor: '#fbedff',
+      // },
+    }
   return (
     <div >
       <Sidebar 
@@ -69,7 +80,7 @@ const SideBar = () => {
             },
           }}>
           
-          <SubMenu icon={<HomeOutlinedIcon className={iconClass}/>} label="Finfinancials">
+          <SubMenu icon={<HomeOutlinedIcon className={iconClass}/>} rootStyles={submenustyle} label="Finfinancials">
           <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Membership">
                 <MenuItem >Authorization</MenuItem>
                 <MenuItem >Enquiries</MenuItem>
@@ -86,14 +97,14 @@ const SideBar = () => {
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Tools/Maintenance</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Setup</MenuItem>
             </SubMenu>
-        <SubMenu icon={<AccountBalanceIcon className={iconClass} />} label="Fixed assests">
+        <SubMenu icon={<AccountBalanceIcon className={iconClass} />} rootStyles={submenustyle} label="Fixed assests">
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Asset Register</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Depreciation</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Fixed Asset Setup</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Revaluation</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Asset disposal</MenuItem>
         </SubMenu>
-        <SubMenu icon={<Inventory2Icon className={iconClass} />} label="Inventory">
+        <SubMenu icon={<Inventory2Icon className={iconClass} />}  rootStyles={submenustyle} label="Inventory">
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stock Request</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stores</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Purchases</MenuItem>
@@ -101,7 +112,7 @@ const SideBar = () => {
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Authorization</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Inventory Setup</MenuItem>
         </SubMenu>
-        <SubMenu icon={<DescriptionIcon className={iconClass} />} label="File tracker">
+        <SubMenu icon={<DescriptionIcon className={iconClass} />} rootStyles={submenustyle} label="File tracker">
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Managment</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Movement</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Authorization</MenuItem>
@@ -110,21 +121,21 @@ const SideBar = () => {
             
     
         </SubMenu>
-        <SubMenu icon={<PeopleIcon className={iconClass} />} label="Human resource">
+        <SubMenu icon={<PeopleIcon className={iconClass} />} rootStyles={submenustyle} label="Human resource">
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass}/>}>Employee Details</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Leave</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Hr Setup</MenuItem>
         </SubMenu>
-        <SubMenu icon={<PaymentsIcon className={iconClass} />} label="Payroll">
+        <SubMenu icon={<PaymentsIcon className={iconClass} />} rootStyles={submenustyle} label="Payroll">
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Payroll Setup</MenuItem>
             
         </SubMenu>
-        <SubMenu icon={<PublicIcon className={iconClass} />} label="Global Adminstration">
+        <SubMenu icon={<PublicIcon className={iconClass} />} rootStyles={submenustyle} label="Global Adminstration">
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Global Setup</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Impact Data</MenuItem>
           
         </SubMenu>
-        <SubMenu icon={<Tooltip title="Consolidated reports"><BarChartIcon className={iconClass}/></Tooltip>} label="Consolidated reports">
+        <SubMenu rootStyles={submenustyle} icon={<Tooltip title="Consolidated reports"><BarChartIcon className={iconClass}/></Tooltip>} label="Consolidated reports">
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Cosolidated Reports List</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Maintain Reports Mapping</MenuItem>
           
