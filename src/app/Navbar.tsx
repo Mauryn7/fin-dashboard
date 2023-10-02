@@ -48,7 +48,7 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
     
       <AppBar position="static"  >
-      Fin-Financials
+    
         <Toolbar>
           
         <IconButton

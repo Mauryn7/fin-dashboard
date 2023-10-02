@@ -33,12 +33,14 @@ const SideBar = () => {
     <div >
       <Sidebar 
         rootStyles={{
-          background: "#0b7c9c !important",
+          background: "bg-blue-200 ",
           opacity:5
         }}
         
        className="h-screen  font-bold"  breakPoint="sm" transitionDuration={800}>
        <div className="flex items-center justify-between p-6">
+       <h2>Fin-Financials</h2>
+        
        {/* <h2>Fin</h2>
        <MenuOutlinedIcon 
             onClick={() => {
@@ -67,48 +69,65 @@ const SideBar = () => {
             },
           }}>
           
-          <SubMenu icon={<HomeOutlinedIcon className={iconClass}/>} label="Home">
+          <SubMenu icon={<HomeOutlinedIcon className={iconClass}/>} label="Finfinancials">
           <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Membership">
                 <MenuItem >Authorization</MenuItem>
                 <MenuItem >Enquiries</MenuItem>
+             
+                
              </SubMenu>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Authorization</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Enquiries</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Transaction</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Loans</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Accounts</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Reports</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>End of period</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Tools/Maintenance</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Setup</MenuItem>
             </SubMenu>
         <SubMenu icon={<AccountBalanceIcon className={iconClass} />} label="Fixed assests">
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Membership</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Authorization</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Enquiries</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Asset Register</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Depreciation</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Fixed Asset Setup</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Revaluation</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Asset disposal</MenuItem>
         </SubMenu>
         <SubMenu icon={<Inventory2Icon className={iconClass} />} label="Inventory">
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Membership</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stock Request</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stores</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Purchases</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stock Items</MenuItem>
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Authorization</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Enquiries</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Inventory Setup</MenuItem>
         </SubMenu>
         <SubMenu icon={<DescriptionIcon className={iconClass} />} label="File tracker">
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Membership</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Authorization</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon />}>Enquiries</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Managment</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Movement</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Authorization</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Tracker Reports</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Tracker Setup</MenuItem>
+            
+    
         </SubMenu>
         <SubMenu icon={<PeopleIcon className={iconClass} />} label="Human resource">
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass}/>}>Membership</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Authorization</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Enquiries</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass}/>}>Employee Details</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Leave</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Hr Setup</MenuItem>
         </SubMenu>
         <SubMenu icon={<PaymentsIcon className={iconClass} />} label="Payroll">
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Membership</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Authorization</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass}/>}>Enquiries</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Payroll Setup</MenuItem>
+            
         </SubMenu>
         <SubMenu icon={<PublicIcon className={iconClass} />} label="Global Adminstration">
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Membership</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Authorization</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Enquiries</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Global Setup</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Impact Data</MenuItem>
+          
         </SubMenu>
         <SubMenu icon={<Tooltip title="Consolidated reports"><BarChartIcon className={iconClass}/></Tooltip>} label="Consolidated reports">
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Membership</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Authorization</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Enquiries</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Cosolidated Reports List</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon  className={iconClass}/>}>Maintain Reports Mapping</MenuItem>
+          
         </SubMenu>
         </Menu>
 
