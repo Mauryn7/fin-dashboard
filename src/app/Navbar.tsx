@@ -17,13 +17,19 @@ import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
 import ConnectWithoutContactRoundedIcon from '@mui/icons-material/ConnectWithoutContactRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
-
+import {useProSidebar } from "react-pro-sidebar"
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import Tooltip from '@mui/material/Tooltip';
 
 export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
+  const {toggleSidebar, collapseSidebar, toggled, broken } = useProSidebar();
+  const toggle = ()=>{
+    toggleSidebar();
+    toggled ? collapseSidebar() : collapseSidebar()
+
+}
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,36 +46,22 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? 'Logout' : 'Login'}
-          
-        
-        />
-        
-      </FormGroup>
+    
       <AppBar position="static"  >
       Fin-Financials
         <Toolbar>
-          <Tooltip title= "Side bar">
+          
         <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={handleMenu}
+                onClick={()=> toggle()}
                 color="inherit"
               >
                 <MenuIcon />
               </IconButton>
-              </Tooltip>
+             
           
           <Typography fontSize={14}  component="div" >
           <Tooltip title="Help" arrow className='text-blue'>
