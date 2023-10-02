@@ -1,162 +1,179 @@
+'use client'
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import Menu from '@mui/material/Menu';
+import TextField from '@mui/material/TextField';
+import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
+import ConnectWithoutContactRoundedIcon from '@mui/icons-material/ConnectWithoutContactRounded';
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 
-const pages = ['Home', 'Contacts', ''];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Navbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+export default function Navbar() {
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuth(event.target.checked);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'primary',
-              textDecoration: 'none',
-            }}
+    <Box sx={{ flexGrow: 1 }}>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={auth}
+              onChange={handleChange}
+              aria-label="login switch"
+            />
+          }
+          label={auth ? 'Logout' : 'Login'}
+          
+        
+        />
+        Fin-Financials
+      </FormGroup>
+      <AppBar position="static"  >
+        <Toolbar>
+          
+          
+          <Typography fontSize={14}  component="div" >
+            Help <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
           >
-            Fin-Financials
+            <HelpOutlineRoundedIcon />
+          </IconButton>
+          
           </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+          <Typography fontSize={14} component="div" >
+            Contact us
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
           >
-            Fin-Financials
+            <ConnectWithoutContactRoundedIcon/>
+          </IconButton>
+          
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+          <Typography fontSize={14} component="div" >
+            About <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <InfoRoundedIcon />
+          </IconButton>
+          
+          </Typography>
+          <Typography  fontSize ={14} component="div" >
+            Change Password
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <ManageAccountsRoundedIcon />
+          </IconButton>
+          
+          </Typography>
+          
+          
+          {auth && (
+            <div className="absolute right-0 top-0 h-16 w-16">
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
               >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <AccountCircle />
               </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+                <MenuItem onClick={handleClose}>Log out</MenuItem>
+              </Menu>
+            </div>
+          )}
         </Toolbar>
-      </Container>
-    </AppBar>
+
+       
+      </AppBar>
+      <div>
+        <TextField
+          label="Current User"
+          id="outlined-size-small"
+          defaultValue="jane"
+          size="small"
+        />
+        <TextField
+          label="Date"
+          id="outlined-size-small"
+          defaultValue="2/10/2023"
+        
+          size="small"
+        />
+        <TextField
+          label="Institution"
+          id="outlined-size-small"
+          defaultValue="Fintech"
+          size="small"
+        />
+        <TextField
+          label="Branch details"
+          id="outlined-size-small"
+          defaultValue="Town"
+          size="small"
+        />
+        </div>
+
+    </Box>
   );
 }
-export default Navbar;
