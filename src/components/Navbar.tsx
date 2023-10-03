@@ -21,9 +21,11 @@ import {useProSidebar } from "react-pro-sidebar"
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import Tooltip from '@mui/material/Tooltip';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
+  const router=useRouter()
   const {toggleSidebar, collapseSidebar, toggled, broken } = useProSidebar();
   const toggle = ()=>{
     toggleSidebar();
@@ -34,6 +36,7 @@ export default function Navbar() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
+    
   };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -42,13 +45,14 @@ export default function Navbar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+    router.push('/login')
   };
 
   return (
     <div>
     <Box sx={{ flexGrow: 1 }}>
     
-      <AppBar position="static" style={{backgroundColor: "#335B8C" }}>
+      <AppBar position="static" style={{backgroundColor: "#1F5780" }}>
     
         <Toolbar>
           

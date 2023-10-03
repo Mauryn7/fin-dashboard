@@ -2,11 +2,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ProSidebarProvider } from "react-pro-sidebar";
 
-import Navbar from '@/components/Navbar';
-import SideBar from '@/components/SideBar';
-import { Footer } from '@/components/Footer';
 
 
 
@@ -25,17 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* wrapp everything with my side bar */}
-        <ProSidebarProvider>
-        <SideBar>
-          <Navbar/>
-          {children}
-          <Footer/>
-        </SideBar>
-
-        
-        </ProSidebarProvider>
-  
+        {children}
     </body>
     </html>
   )
