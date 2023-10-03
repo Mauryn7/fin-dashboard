@@ -5,7 +5,7 @@ const Loans = () => {
     return (
 
         <>
-            <div className='w-full shadow-lg  md:col-span-1 relatiive lg:h-[50vh] h-[50vh]  p-2 border rounded-lg bg-white'>
+            <div className='w-full shadow-lg  md:col-span-2 relatiive lg:h-[50vh] h-[50vh] m-auto  p-2 border rounded-lg bg-white'>
                 {/* <div className='flex items-center justify-center'>
                     <h2 className='text-gray-500 font-medium'>Loans</h2>
                 </div> */}

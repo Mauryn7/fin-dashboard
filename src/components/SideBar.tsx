@@ -22,6 +22,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import StreamIcon from '@mui/icons-material/Stream';
 import { useState } from "react";
 
 
@@ -41,25 +42,33 @@ const SideBar = ({ children }) => {
     //   backgroundColor: '#fbedff',
     // },
   }
+  const [submenuActiveStates, setSubmenuActiveStates] = useState([false, false, false]); // Initialize with as many false values as you have submenus
+
+  const handleSubmenuClick = (index) => {
+    // Set the active state for the clicked submenu
+    const updatedActiveStates = [...submenuActiveStates];
+    updatedActiveStates[index] = true;
+    setSubmenuActiveStates(updatedActiveStates);
+  };
   return (
     <div className="flex">
-      <div className="min-h-screen bg-[#3b7fa4]">
+      <div className="min-h-screen">
         <Sidebar
-          // rootStyles={{
-          //   background: "#0b7c9c !important",
-          //   opacity:5
-          // }}
+          rootStyles={{
+           
+            opacity:1,
+            width:"100%",
+            color:"black",
+            fontSize:"15px",
+            fontWeight:"bold",
+          }}
 
-          className=" font-bold text-white" backgroundColor="#3b7fa4" breakPoint="sm" transitionDuration={300}>
+         breakPoint="sm" transitionDuration={300}>
           <div className="flex items-center justify-between p-6">
-            <h2>Fin</h2>
-            <MenuOutlinedIcon
-              onClick={() => {
-                collapseSidebar();
-              }}
-              style={{ textAlign: "center" }}
-
-            />
+            <h2 className="capitalize text-black font-semibold" >
+              {toggled ? (<StreamIcon/>): "fin finfinancials"}
+             </h2>
+            
 
           </div>
 
@@ -67,9 +76,8 @@ const SideBar = ({ children }) => {
             button: ({ level, active, disabled }) => {
               if (level === 0) {
                 return {
-                  color: disabled ? "#fff" : "#455A64",
-                 
-                  backgroundColor: active ? "#fff" : undefined,
+                  color: active ? "white" : "black",
+                  backgroundColor: active ? "#335B8C" : undefined,
                   "&:hover": {
                     backgroundColor: "#335B8C !important",
                     color: "white !important",
@@ -81,8 +89,11 @@ const SideBar = ({ children }) => {
             },
           }}>
           
-          <SubMenu icon={<HomeOutlinedIcon className={iconClass}/>} rootStyles={submenustyle} label="Finfinancials">
-          <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Membership">
+          <SubMenu active={true} icon={<HomeOutlinedIcon className={iconClass}/>} rootStyles={submenustyle} label="Finfinancials">
+          <SubMenu
+          active={submenuActiveStates[0]} // Use the state variable for this submenu
+          onClick={() => handleSubmenuClick(0)}
+          icon={<PeopleOutlinedIcon className={iconClass}   />} label="Membership">
                 <MenuItem >Authorization</MenuItem>
                 <MenuItem >Enquiries</MenuItem>
              
