@@ -68,7 +68,7 @@ const SideBar = ({ children }) => {
               if (level === 0) {
                 return {
                   color: disabled ? "#fff" : "#455A64",
-                  color: "#fff",
+                 
                   backgroundColor: active ? "#fff" : undefined,
                   "&:hover": {
                     backgroundColor: "#335B8C !important",
