@@ -15,6 +15,7 @@ import PeopleIcon from '@mui/icons-material/People'
 import PaymentsIcon from '@mui/icons-material/Payments'
 import PublicIcon from '@mui/icons-material/Public'
 import BarChartIcon from '@mui/icons-material/BarChart'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -67,7 +68,7 @@ const SideBar = () => {
             button: ({ level, active, disabled }) => {
               if (level === 0) {
                 return {
-                  color: disabled ? "#eee" : "#455A64",
+                  color: disabled ? "#fff" : "#455A64",
                   backgroundColor: active ? "#fff" : undefined,
                   "&:hover": {
                      backgroundColor: "#335B8C !important",
@@ -82,20 +83,175 @@ const SideBar = () => {
           
           <SubMenu icon={<HomeOutlinedIcon className={iconClass}/>} rootStyles={submenustyle} label="Finfinancials">
           <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Membership">
-                <MenuItem >Authorization</MenuItem>
-                <MenuItem >Enquiries</MenuItem>
+                <MenuItem >Change Account Status</MenuItem>
+                <MenuItem >Change Membership Type</MenuItem>
+                <MenuItem >Membership Withdrawal</MenuItem>
+                <MenuItem >Blocked Saving</MenuItem>
+                <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Group Management">
+                <MenuItem >Group Management Parameters</MenuItem>
+                <MenuItem >Group Transfers</MenuItem>
+
+                </SubMenu>
+                <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Directory Management">
+                <MenuItem >Non-Account Holders Mangement</MenuItem>
+                <MenuItem >Account Holder</MenuItem>
+                <MenuItem >Biometrics Manager</MenuItem>
+                <MenuItem >Account Holder Upload</MenuItem>
+              
+                </SubMenu>
+                <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Vehicle Registration">
+                <MenuItem >Vehicle Registration</MenuItem>
+                <MenuItem >Authorized Vehicle Registration </MenuItem>
+                <MenuItem >Vehicle Transfers</MenuItem>
+                <MenuItem >Auhorized Vehcle Tranfers</MenuItem>
+                <MenuItem >Vehicle Ticketing</MenuItem>
+                </SubMenu>
+        
+             </SubMenu> 
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Authorization">
+             <MenuItem >Non Transactional Items</MenuItem>
              
-                
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Authorise Teller Transaction">
+             <MenuItem >Group Management Transfers</MenuItem>
+             <MenuItem >Group Authorization Transfers</MenuItem>
+             <MenuItem >Overdraft Authorization</MenuItem>
+             <MenuItem >Biometric Authorization</MenuItem>
+             <MenuItem >Directory Authorization</MenuItem>
              </SubMenu>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Authorization</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Enquiries</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Transaction</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Loans</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Accounts</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Reports</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>End of period</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Tools/Maintenance</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Setup</MenuItem>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Financial Instrument Authorization">
+             <MenuItem >Authorize Contract</MenuItem>
+             <MenuItem >Authorize Schedule</MenuItem>
+             
+             </SubMenu>
+
+             <MenuItem >Creditors and Debtors Authorization</MenuItem>
+             <MenuItem >Debt Collection setup Authorization</MenuItem>
+             <MenuItem >Guarantor Parameterization</MenuItem>
+             <MenuItem >Approve Facility Disbursement Options</MenuItem>
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Atm Cards Management">
+              
+             <MenuItem >Authorize Cards Request</MenuItem>
+             <MenuItem >Authorize Cart Items</MenuItem>
+
+
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Loan Eligibity Authorization">
+             <MenuItem > Authorize Eligibility Defination</MenuItem>
+             </SubMenu>
+             
+
+             </SubMenu>
+
+  
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Enquiries">
+             <MenuItem > Member Enquiries</MenuItem>
+             <MenuItem > Batches</MenuItem>
+             <MenuItem > Statements </MenuItem>
+             <MenuItem > Facility Quote</MenuItem>
+             <MenuItem > Accounts lookup</MenuItem>
+             <MenuItem > Dashboard</MenuItem>
+             </SubMenu>
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Transactions">
+             <MenuItem >Journals </MenuItem>
+             <MenuItem >Tellering</MenuItem>
+             <MenuItem >Check off </MenuItem>
+             <MenuItem >Pay Out </MenuItem>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Term Deposit ">
+             <MenuItem > Capture Term Deposit</MenuItem>
+             <MenuItem > Approve Term Deposit</MenuItem>
+             </SubMenu>
+             <MenuItem > Overdraft</MenuItem>
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Standing Orders">
+             <MenuItem >Dividends</MenuItem>
+             <MenuItem >Data Extraction </MenuItem>
+             <MenuItem >Manual Charges Accrual </MenuItem>
+             </SubMenu>
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Vault Management">
+             <MenuItem > Clear Cheques</MenuItem>
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Allowances Transactions">
+             <MenuItem > Utilize allowances </MenuItem>
+             <MenuItem > Authorize Transaction</MenuItem>
+             </SubMenu>
+             <MenuItem>Capture Direct Reciepts</MenuItem>
+             <MenuItem>Group Items</MenuItem>
+             </SubMenu>
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Loans">
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Loan Variations">
+             <MenuItem > Clear Cheques</MenuItem>
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Debt Collection">
+             <MenuItem > Clear Cheques</MenuItem>
+             </SubMenu>
+                    
+             <MenuItem > Loan View</MenuItem>
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Collateral Management">
+             <MenuItem > Capture collateral</MenuItem>
+             <MenuItem > Approve collateral</MenuItem>
+
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Group Applications">
+             <MenuItem >Application register </MenuItem>
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Loan WorkFlow Stages">
+             <MenuItem > Manage stages </MenuItem>
+             <MenuItem > Authorize Stage Operations</MenuItem>
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Facility WorkFlow Process">
+             <MenuItem > Capture Application</MenuItem>
+             <MenuItem > Appraise Application</MenuItem>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Application Disbursements">
+             <MenuItem > Capture Application</MenuItem>
+             <MenuItem > Appraise Application</MenuItem>
+    
+             </SubMenu>
+             </SubMenu>
+
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Facility Schedules">
+             <MenuItem > Create schedules </MenuItem>
+             <MenuItem > Authorize schedules </MenuItem>
+      
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Loan Write off">
+             <MenuItem > Capture Write off</MenuItem>
+             <MenuItem > Approve Write-off </MenuItem>
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Guarantor Administration">
+             <MenuItem > Guarantor release</MenuItem>
+             <MenuItem > Guarantor Authorization</MenuItem>
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Mass Intrest change">
+             <MenuItem > Capture Intrest Change</MenuItem>
+             <MenuItem > Authorize Intrest Change</MenuItem>
+             
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Facility Manual Billing">
+             <MenuItem > Capture Billing Options </MenuItem>
+             <MenuItem > Authorize Billing Options</MenuItem>
+             
+             </SubMenu>
+             <SubMenu  icon={<PeopleOutlinedIcon className={iconClass}  />} label="Default Loan Transfers">
+             <MenuItem > Initiate Transfers to Guarantor</MenuItem>
+             <MenuItem > Authorize Transfers to Guarantors</MenuItem>
+            
+    
+             </SubMenu>
+
+              
+             </SubMenu>
+
+
+
+          
+          
             </SubMenu>
         <SubMenu icon={<AccountBalanceIcon className={iconClass} />} rootStyles={submenustyle} label="Fixed assests">
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Asset Register</MenuItem>
