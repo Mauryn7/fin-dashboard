@@ -3,6 +3,10 @@ import Image from 'next/image'
 import SideBar from './components/SideBar'
 import {useProSidebar } from "react-pro-sidebar";
 import Dashboard from '@/components/Dashboard';
+import TopCards from '@/components/TopCards';
+import Loans from '@/components/Loans';
+import Transactions from '@/components/Transactions';
+import Reports from '@/components/Reports';
 
 
 
@@ -14,28 +18,14 @@ export default function Home() {
 
 }
   return (
-   <div className='h-screen flex '>
-      <main className=' w-full flex p-4'>
+    <main className='min-h-screen'>
+      <TopCards/>
+      <div className='p-2 grid lg:grid-cols-3 md:grid-cols-1  gap-4'>
+        <Loans/>
+        <Reports/>
+        <Transactions/>
+      </div>
         
-        
-        {/* <h1 onClick={()=> toggle()} className='mb-4'>
-        React-Pro-Sidebar
-
-        </h1> */}
-
-        <Dashboard/>
-         
-        
-{/*         
-        {toggled ? (
-          <h1 style={{ color: "black", marginLeft: "5rem" }}>Toggled</h1>
-        ) : (
-          <h1 style={{ color: "black", marginLeft: "5rem" }}>Not Toggled</h1>
-        )} */}
-          {/* {broken && (
-          <h1 style={{ color: "black", marginLeft: "5rem" }}>Small screen</h1>
-        )} */}
       </main>
-   </div>
   )
 }
