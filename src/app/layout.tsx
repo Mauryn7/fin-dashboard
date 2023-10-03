@@ -1,11 +1,12 @@
 "use client"
-import SideBar from '@/components/SideBar';
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ProSidebarProvider } from "react-pro-sidebar";
-import Navbar from './Navbar';
 
+import Navbar from '@/components/Navbar';
+import SideBar from '@/components/SideBar';
+import { Footer } from '@/components/Footer';
 
 
 
@@ -26,16 +27,12 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* wrapp everything with my side bar */}
         <ProSidebarProvider>
-          <div className="flex">
-            <div className='flex'>
-              <SideBar/>
-            </div>
-            <div className='flex-1'>
-              <Navbar/>
-            {children}
-            </div>
-          </div>
-          
+        <SideBar>
+          <Navbar/>
+          {children}
+          <Footer/>
+        </SideBar>
+
         
         </ProSidebarProvider>
   
