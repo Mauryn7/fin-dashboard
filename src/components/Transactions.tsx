@@ -5,7 +5,7 @@ import { ResponsiveLine } from '@nivo/line'
 const Transactions = () => {
     return (
        <>
-        <div className='w-full shadow-lg  md:col-span-3 relatiive lg:h-[50vh] h-[60vh] m-auto  p-2 border rounded-lg bg-white'>
+        <div className='w-full shadow-lg  md:col-span-3 relatiive lg:h-[50vh] h-[60vh] m-auto  p-2 border rounded-lg bg-[#ffffff]'>
             {/* <div className='flex items-center justify-center'>
                 <h2 className='text-gray-500 font-medium'>Transactions</h2>
             </div> */}

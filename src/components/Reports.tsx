@@ -6,7 +6,7 @@ const Reports = () => {
     return (
 
         <>
-            <div className='w-full shadow-lg  md:col-span-1 relatiive lg:h-[50vh] h-[50vh] m-auto  p-2 border rounded-lg bg-white'>
+            <div className='w-full shadow-lg  md:col-span-1 relatiive lg:h-[50vh] h-[50vh] m-auto  p-2 border rounded-lg bg-[#ffffff]'>
                 {/* <div className='flex items-center justify-center'>
                     <h2 className='text-gray-500 font-medium'>Reports</h2>
                 </div> */}

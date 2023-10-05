@@ -1,18 +1,10 @@
-"use client"
-import {
-  Typography
-} from '@mui/material';
-import Link from 'next/link';
-import React, {
-  useState
-} from 'react';
-import {
-  HiUser
-} from "react-icons/hi"
+import Link from 'next/link'
+import React from 'react'
 
-function login() {
+const Mark = () => {
   return (
-    <main className="flex bg-[#ededed] min-h-screen flex-col sm:w-2/2  justify-center items-center h-screen">
+    
+       <main className="flex bg-[#ededed] min-h-screen flex-col sm:w-2/2  justify-center items-center h-screen">
       <div
         className='flex bg-white w-[90%] md:w-[40%] lg:w-[30%]  h-auto justify-center items-center p-1 m-5 shadow-2xl rounded-2xl'
         style={{
@@ -23,7 +15,7 @@ function login() {
         <div className='w-[100%] p-5 h-full  m-auto '>
           <h2 className='text-1xl font-bold mb-1 text-center capitalize text-sky-900 text-3xl'>finfinancials</h2>
           <div className="flex  justify-center items-center iconn__wrappe p-0">
-            <HiUser className="text-sky-900" size={90} />
+           
           </div>
           <form  >
             <div className='mb-4'>
@@ -84,7 +76,9 @@ function login() {
           </div>
         </div>
       </div>
-    </main>)
+      </main>
+    
+  )
 }
 
-export default login
+export default Mark;

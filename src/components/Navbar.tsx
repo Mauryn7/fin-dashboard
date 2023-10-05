@@ -22,6 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import Tooltip from '@mui/material/Tooltip';
 import { useRouter } from 'next/navigation';
+import { SideBarContext } from '@/context/SideBarContext';
 
 export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
@@ -47,12 +48,16 @@ export default function Navbar() {
     setAnchorEl(null);
     router.push('/login')
   };
-
+  
+  const iconstyle="black"
+  const {state, setState} = React.useContext(SideBarContext)
+  const anchor="left"
+ 
   return (
-    <div>
+    <div className='fixed top-0 w-full z-10 text-black '>
     <Box sx={{ flexGrow: 1 }}>
     
-      <AppBar position="static" style={{backgroundColor: "#1F5780" }}>
+      <AppBar position="static" style={{backgroundColor: "#FFFFFF", color:"black",  display:"flex", justifyContent:"space-between"}} className='flex justify-between'>
     
         <Toolbar>
           
@@ -61,13 +66,18 @@ export default function Navbar() {
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={()=> toggle()}
+                onClick={()=> setState({ ...state, [anchor]: true })}
                 color="inherit"
               >
-                <MenuIcon />
+                <MenuIcon  className={iconstyle}/>
               </IconButton>
              
           
+          
+          
+          {auth && (
+            <div className=" h-16 w-16 flex">
+              
           <Typography fontSize={14}  component="div" >
           <Tooltip title="Help" arrow className='text-blue'>
             <IconButton
@@ -77,7 +87,7 @@ export default function Navbar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >         
-            <HelpOutlineRoundedIcon />
+            <HelpOutlineRoundedIcon className={iconstyle} />
             
           </IconButton>
           
@@ -109,7 +119,7 @@ export default function Navbar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <InfoRoundedIcon />
+            <InfoRoundedIcon className={iconstyle} />
           </IconButton>
           </Tooltip>
           
@@ -123,15 +133,11 @@ export default function Navbar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <ManageAccountsRoundedIcon />
+            <ManageAccountsRoundedIcon className={iconstyle} />
           </IconButton>
           </Tooltip>
           
           </Typography>
-          
-          
-          {auth && (
-            <div className="absolute right-0 top-0 h-16 w-16">
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -140,7 +146,7 @@ export default function Navbar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <AccountCircle className={iconstyle}/>
               </IconButton>
               <Menu
                 id="menu-appbar"

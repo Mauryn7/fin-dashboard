@@ -17,8 +17,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const TopCards = () => {
     return (
-        <div className='grid lg:grid-cols-6 gap-4 p-4'>
-            <div className='lg:col-span-2 col-span-1 shadow-lg bg-white  flex justify-between w-full  border p-4 rounded-lg hover:shadow-md hover:bg-gray-100 transition duration-300 ease-in-out'>
+        <div className='grid lg:grid-cols-6 gap-4 p-4 '>
+            <div className='lg:col-span-2 col-span-1 shadow-lg bg-[#ffffff]  flex justify-between w-full  border p-4 rounded-lg hover:shadow-md hover:bg-gray-100 transition duration-300 ease-in-out'>
                 <div className='flex flex-col w-full pb-4'>
                     <p className='text-2xl font-bold'>$7846</p>
                     <p className='text-gray-600'>Daily Revenue</p>

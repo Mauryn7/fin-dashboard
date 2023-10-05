@@ -24,10 +24,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StreamIcon from '@mui/icons-material/Stream';
 import { useState } from "react";
+import Link from "next/link";
 
 
 
-const SideBar = ({ children }) => {
+const SideBar = () => {
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken } = useProSidebar();
   const [value, setValue] = useState(0);
   const iconClass = "text-black"
@@ -51,36 +52,24 @@ const SideBar = ({ children }) => {
     setSubmenuActiveStates(updatedActiveStates);
   };
   return (
-    <div className="flex">
-      <div className="min-h-screen">
+    
         <Sidebar
           rootStyles={{
-           
-            opacity:1,
-            width:"100%",
-            color:"black",
-            fontSize:"15px",
-            fontWeight:"bold",
+    
+            background:"white",
+    
           }}
-
-         breakPoint="sm" transitionDuration={300}>
-          <div className="flex items-center justify-between p-6">
-            <h2 className="capitalize text-black font-semibold" >
-              {toggled ? (<StreamIcon/>): "fin finfinancials"}
-             </h2>
-            
-
-          </div>
-
+ transitionDuration={300}>
+         
           <Menu menuItemStyles={{
             button: ({ level, active, disabled }) => {
               if (level === 0) {
                 return {
                   color: active ? "white" : "black",
-                  backgroundColor: active ? "#1F5780" : undefined,
+                  backgroundColor: active ? "#5a5a5a" : undefined,
                   "&:hover": {
-                    backgroundColor: "#5a5a5a !important",
-                    color: "white !important",
+                    backgroundColor: "#gray !important",
+                    color: "black !important",
                     // borderRadius: "8px !important",
                     fontWeight: "bold !important"
                   },
@@ -110,7 +99,12 @@ const SideBar = ({ children }) => {
             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Setup</MenuItem>
             </SubMenu>
             <SubMenu icon={<AccountBalanceIcon className={iconClass} />} rootStyles={submenustyle} label="Fixed assests">
-              <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Asset Register</MenuItem>
+              <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>
+                <Link href="/Dashboard/Assets">
+                Asset Register
+                </Link>
+                
+                </MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Depreciation</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Fixed Asset Setup</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Revaluation</MenuItem>
@@ -158,13 +152,7 @@ const SideBar = ({ children }) => {
 
 
         </Sidebar>
-      </div>
-      <main className="w-full">
-        {children}
-
-      </main>
-
-    </div>
+      
   )
 }
 
