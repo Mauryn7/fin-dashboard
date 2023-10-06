@@ -10,7 +10,7 @@ import {
   HiUser
 } from "react-icons/hi"
 
-function login() {
+function Login() {
   return (
     <main className="flex bg-[#ededed] min-h-screen flex-col sm:w-2/2  justify-center items-center h-screen">
       <div
@@ -87,4 +87,4 @@ function login() {
     </main>)
 }
 
-export default login
+export default Login
