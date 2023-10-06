@@ -25,11 +25,15 @@ function Home() {
                         <Breadcrumbs aria-label="breadcrumb">
 
                             <h2 color="text.primary">
-                                <Link href={`/`}>
-                                    {slug === undefined ? `/Dashboard` : slug}
+                                <Link href={`/Dashboard`}>
+                                    {slug}
                                 </Link>
                             </h2>
-                            
+                            <h2>
+                                <Link href={`/Dashboard`} className='text-tahiti'>
+                                    {slug}
+                                </Link>
+                            </h2>
                         </Breadcrumbs>
                     </div>
                     <div className='flex mt-4'>

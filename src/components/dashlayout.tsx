@@ -6,9 +6,11 @@ const Dashlayout = ({children}) => {
   return (
     <div className='relative flex flex-col'>
       <Navbar/>
+  
       <div className='overflowY-scroll w-full mt-16'>
         {children}
       </div>
+ 
       <Footer/>
     </div>
   )

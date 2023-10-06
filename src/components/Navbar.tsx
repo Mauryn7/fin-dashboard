@@ -59,7 +59,7 @@ export default function Navbar() {
     
       <AppBar position="static" style={{backgroundColor: "#FFFFFF", color:"black",  display:"flex", justifyContent:"space-between"}} className='flex justify-between'>
     
-        <Toolbar>
+        <Toolbar className='flex justify-between'>
           
         <IconButton
                 size="large"
@@ -76,7 +76,7 @@ export default function Navbar() {
           
           
           {auth && (
-            <div className=" h-16 w-16 flex">
+            <div className="flex">
               
           <Typography fontSize={14}  component="div" >
           <Tooltip title="Help" arrow className='text-blue'>
