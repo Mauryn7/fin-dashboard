@@ -41,24 +41,71 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken } = useProSidebar();
-  const [activeSubMenu, setActiveSubMenu] = useState(""); // State to track the active submenu
+  const [activeSubMenu, setActiveSubMenu] = useState("");
+  const [activeSubMenuLevel1, setActiveSubMenuLevel1] = useState("");// State to track the active submenu
   const iconClass = "text-black";
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+  const [display, setDisplay] = useState("flex");
   const submenustyle = {
     color: '#1F5780',
     '&:hover': {
       backgroundColor: '#1F5780',
     },
+    button: ({ level, active, disabled }) => {
+      if (level === 0) {
+        return {
+          display: activeSubMenu ? "none" : "flex", // Hide submenus when one is active
+          color: active ? "white" : "black",
+          alignItems: "center",
+          backgroundColor: active ? "#1F5780" : undefined,
+          "&:hover": {
+            backgroundColor: "#5a5a5a !important",
+            color: "white !important",
+            fontWeight: "bold !important",
+          },
+        };
+      } else if (level === 1) {
+        return {
+          display: activeSubMenuLevel1 ? "none":"flex"  // Hide level 1 submenus when another level 1 submenu is active
+          // Rest of the styles
+        };
+      }
+    },
+  
   };
 
-  const handleSubMenuClick = (subMenuKey) => {
-    if (activeSubMenu === subMenuKey) {
-      // If the clicked submenu is already active, deactivate it
-      setActiveSubMenu("");
-    } else {
-      // Otherwise, set the clicked submenu as active
-      setActiveSubMenu(subMenuKey);
+  const handleSubMenuClick = (subMenuKey: string, level: number) => {
+    if (level === 0) {
+      if (activeSubMenu === subMenuKey) {
+        // If the clicked submenu is already active, deactivate it
+        setActiveSubMenu("");
+      } else {
+        // Otherwise, set the clicked submenu as active
+        setActiveSubMenu(subMenuKey);
+      }
+    } else if (level === 1) {
+      if (activeSubMenuLevel1 === subMenuKey) {
+        // If the clicked submenu is already active, deactivate it
+        setActiveSubMenuLevel1("");
+        setDisplay("flex")
+      } else {
+        // Otherwise, set the clicked submenu as active
+        setActiveSubMenuLevel1(subMenuKey);
+        setDisplay("flex")
+      }
     }
   };
+  const handleBackClick = (level:number) => {
+    if (level === 1) {
+      setActiveSubMenuLevel1("");
+      setDisplay("hidden")
+    } else if (level === 0) {
+      setActiveSubMenu("");
+      setIsSubMenuOpen(false);
+       // Close the submenu when going back
+    }
+  };
+
 
   return (
     <div className="flex">
@@ -71,10 +118,10 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             fontSize: "15px",
             fontWeight: "bold",
           }}
-         
+
           transitionDuration={300}
         >
-         
+
 
           <Menu
             menuItemStyles={{
@@ -91,9 +138,16 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                       fontWeight: "bold !important",
                     },
                   };
+                } else if (level === 1) {
+                  return {
+                    display: activeSubMenuLevel1 ? "none": "flex"  // Hide level 1 submenus when another level 1 submenu is active
+                    // Rest of the styles
+                  };
                 }
               },
+            
             }}
+            
           >
             {/* Submenu for Finfinancials */}
             <SubMenu
@@ -110,27 +164,33 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   ) : null}
                 </div>
               }
-              onClick={() => handleSubMenuClick("Finfinancials")}
+              onClick={() =>{ 
+                handleSubMenuClick("Finfinancials", 0)
+                // setIsSubMenuOpen(true); 
+            }}
             >
-              <SubMenu icon={<PeopleOutlinedIcon className={iconClass}  />} label="Membership">
-                <MenuItem >Change Account Status</MenuItem>
-                <MenuItem >Open Product Account</MenuItem>
-                <MenuItem >Change Membership Type</MenuItem>
-                <MenuItem>Membership Withdrawal</MenuItem>
-                <MenuItem>Blocked Saving</MenuItem>
-          
-                <SubMenu icon={<Groups2Icon className={iconClass}  />} label="Group Management">
-                <MenuItem>Group Management Parameters</MenuItem>
-                <MenuItem>Group Transfers</MenuItem>
+              <SubMenu open={isSubMenuOpen} onClick={() => handleSubMenuClick("Membership", 1)} icon={<PeopleOutlinedIcon className={iconClass} />} label="Membership">
+                <button className={`${display} w-full bg-gray-200 justify-center text-black shadow-md rounded-md capitalize`} style={{
+                  cursor:"pointer"
+                }} onClick={() => handleBackClick(1)}>previous menu</button>
+                <MenuItem className={`${display}`} >Change Account Status</MenuItem>
+                <MenuItem className={`${display}`}>Open Product Account</MenuItem>
+                <MenuItem className={`${display}`}>Change Membership Type</MenuItem>
+                <MenuItem className={`${display}`}>Membership Withdrawal</MenuItem>
+                <MenuItem className={`${display}`}>Blocked Saving</MenuItem>
+
+                <SubMenu className={`${display}`} icon={<Groups2Icon className={iconClass} />} label="Group Management">
+                  <MenuItem >Group Management Parameters</MenuItem>
+                  <MenuItem >Group Transfers</MenuItem>
 
                 </SubMenu>
-                <SubMenu icon={<FolderSharedIcon className={iconClass}  />} label="Directory Management">
+                <SubMenu className={`${display}`} icon={<FolderSharedIcon className={iconClass} />} label="Directory Management">
                   <MenuItem>Non-Account Holders Management</MenuItem>
                   <MenuItem>Account Holders Management</MenuItem>
                   <MenuItem>Biometrics Manager</MenuItem>
                   <MenuItem>Account Holder Upload</MenuItem>
                 </SubMenu>
-                <SubMenu icon={<DriveEtaIcon className={iconClass}  />} label="Vehicle Operations">
+                <SubMenu className={`${display}`} icon={<DriveEtaIcon className={iconClass} />} label="Vehicle Operations">
                   <MenuItem>Vehicle Registration</MenuItem>
                   <MenuItem>Authorize Vehicle Registration</MenuItem>
                   <MenuItem>Vehicle Transfers</MenuItem>
@@ -138,236 +198,236 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   <MenuItem>Vehicle Ticketing</MenuItem>
                 </SubMenu>
 
-             </SubMenu>
-             <SubMenu icon={<AccessibilityIcon className={iconClass}  />} label="Authorization">
-              <MenuItem>Non-Transactional Item</MenuItem>
-                <SubMenu icon={<AccessibilityIcon className={iconClass}  />} label="Authorize Teller Transaction">
-                <MenuItem>Authorise Other Teller Transaction</MenuItem>
-                <MenuItem>Authorise Direct Receipts</MenuItem>
-                <MenuItem>Authorise sale of Cheques</MenuItem>
               </SubMenu>
+              <SubMenu icon={<AccessibilityIcon className={iconClass} />} label="Authorization">
+                <MenuItem>Non-Transactional Item</MenuItem>
+                <SubMenu icon={<AccessibilityIcon className={iconClass} />} label="Authorize Teller Transaction">
+                  <MenuItem>Authorise Other Teller Transaction</MenuItem>
+                  <MenuItem>Authorise Direct Receipts</MenuItem>
+                  <MenuItem>Authorise sale of Cheques</MenuItem>
+                </SubMenu>
 
-              <MenuItem>Group Management Authorization</MenuItem>
+                <MenuItem>Group Management Authorization</MenuItem>
                 <MenuItem>Group Transfers Authorization</MenuItem>
                 <MenuItem>Overdraft Authorization</MenuItem>
                 <MenuItem>Biometric Authorization </MenuItem>
                 <MenuItem>Directory Authorization</MenuItem>
-                <SubMenu icon={<AccessibilityIcon className={iconClass}  />} label="Financial Instruments Authorization">
+                <SubMenu icon={<AccessibilityIcon className={iconClass} />} label="Financial Instruments Authorization">
                   <MenuItem>Authorize Contract</MenuItem>
                   <MenuItem>Authorize Schedule</MenuItem>
                 </SubMenu>
                 <MenuItem>Creditors and Debtors Authorization</MenuItem>
-                  <MenuItem>Debt collection stage setup Authorizations</MenuItem>
-                  <MenuItem>Guarantor Parameterization</MenuItem>
-                  <MenuItem>Approve Facility Disburment Options</MenuItem>
-                  <SubMenu icon={<QuizRoundedIcon className={iconClass}  />} label="Atm Cards Management">
-                    <MenuItem>Authorize Card Request</MenuItem>
-                    <MenuItem>Authorize Card Mappings</MenuItem>
+                <MenuItem>Debt collection stage setup Authorizations</MenuItem>
+                <MenuItem>Guarantor Parameterization</MenuItem>
+                <MenuItem>Approve Facility Disburment Options</MenuItem>
+                <SubMenu icon={<QuizRoundedIcon className={iconClass} />} label="Atm Cards Management">
+                  <MenuItem>Authorize Card Request</MenuItem>
+                  <MenuItem>Authorize Card Mappings</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<QuizRoundedIcon className={iconClass} />} label="Loan Eligibility Authorization">
+                  <MenuItem>Authorize Eligibility Defination</MenuItem>
+                </SubMenu>
+
+              </SubMenu>
+
+              <SubMenu icon={<QuizRoundedIcon className={iconClass} />} label="Enquiries">
+
+                <MenuItem>Member Enquiries</MenuItem>
+                <MenuItem>Batches</MenuItem>
+                <MenuItem>Statements</MenuItem>
+                <MenuItem>Facility Quote</MenuItem>
+                <MenuItem>Transactions View</MenuItem>
+                <MenuItem>Accounts Lookup</MenuItem>
+                <MenuItem>Dashboard</MenuItem>
+
+              </SubMenu>
+
+              <SubMenu icon={<EventBusyIcon className={iconClass} />} label="Transactions">
+                <MenuItem>Journals</MenuItem>
+                <MenuItem>Tellering</MenuItem>
+                <MenuItem>Check off</MenuItem>
+                <MenuItem>Pay out</MenuItem>
+                <SubMenu icon={<EventBusyIcon className={iconClass} />} label="Term deposit">
+                  <MenuItem>Capture Term deposit</MenuItem>
+                  <MenuItem>Approve Term Deposit</MenuItem>
+                </SubMenu>
+
+                <MenuItem>Overdraft</MenuItem>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Standing orders">
+                  <MenuItem>Dividends</MenuItem>
+                  <MenuItem>Data Extraction</MenuItem>
+                  <MenuItem>Manual Charges Accrual</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Vault Management">
+                  <MenuItem>Clear cheques</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Allowance Transactions">
+                  <MenuItem>Capture Direct Receipt</MenuItem>
+                  <MenuItem>Group Statements</MenuItem>
+                </SubMenu>
+
+
+              </SubMenu>
+              <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Loans">
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Loan Variations">
+
+                  <MenuItem>Capture Reschedule</MenuItem>
+                  <MenuItem>Approve Reschedule</MenuItem>
+
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Debt Collection">
+                  <MenuItem>Debt Collection Queue</MenuItem>
+                  <MenuItem>Debt Collection Setup</MenuItem>
+                </SubMenu>
+
+
+                <MenuItem>Loan view</MenuItem>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Collateral Management">
+                  <MenuItem>Capture Collateral</MenuItem>
+                  <MenuItem>Approve Collateral</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Group Applications">
+                  <MenuItem>Application Register</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Loan Workflow stages ">
+                  <MenuItem>Manage Stages</MenuItem>
+                  <MenuItem>Authorize Stage Operations</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Facility WorkFlow Process">
+                  <MenuItem>Capture Application</MenuItem>
+                  <MenuItem>Appraise Application</MenuItem>
+                  <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Application Disbursements">
+                    <MenuItem>Capture Disbursement</MenuItem>
+                    <MenuItem>Authorize Disbursement</MenuItem>
                   </SubMenu>
-                  <SubMenu icon={<QuizRoundedIcon className={iconClass}  />} label="Loan Eligibility Authorization">
-                    <MenuItem>Authorize Eligibility Defination</MenuItem>
-                  </SubMenu>
-              
-             </SubMenu>
-      
-             <SubMenu icon={<QuizRoundedIcon className={iconClass}  />} label="Enquiries">
-              
-             <MenuItem>Member Enquiries</MenuItem>
-             <MenuItem>Batches</MenuItem>
-             <MenuItem>Statements</MenuItem>
-             <MenuItem>Facility Quote</MenuItem>
-             <MenuItem>Transactions View</MenuItem>
-             <MenuItem>Accounts Lookup</MenuItem>
-             <MenuItem>Dashboard</MenuItem>
-                
-             </SubMenu>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Facility Schedules">
+                  <MenuItem>Create Schedules</MenuItem>
+                  <MenuItem>Authorize Schedules</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Loan Write off">
+                  <MenuItem>Capture Write Off</MenuItem>
+                  <MenuItem>Approve Write Off</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Guarantor Administartion">
+                  <MenuItem>Guarantor Release</MenuItem>
+                  <MenuItem>Guarantor Authorization</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Mass Intrest Change">
+                  <MenuItem>Capture Interest Charge</MenuItem>
+                  <MenuItem>Authorise Interest Charge</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Facility Manual Billing">
+                  <MenuItem>Capture Billing Options</MenuItem>
+                  <MenuItem>Authorize Billing options</MenuItem>
 
-             <SubMenu icon={<EventBusyIcon className={iconClass}  />} label="Transactions">
-              <MenuItem>Journals</MenuItem>
-              <MenuItem>Tellering</MenuItem>
-              <MenuItem>Check off</MenuItem>
-              <MenuItem>Pay out</MenuItem>
-              <SubMenu icon={<EventBusyIcon className={iconClass}  />} label="Term deposit">
-                <MenuItem>Capture Term deposit</MenuItem>
-                <MenuItem>Approve Term Deposit</MenuItem>
-              </SubMenu>
-              
-              <MenuItem>Overdraft</MenuItem>
-              <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Standing orders">
-               <MenuItem>Dividends</MenuItem>
-               <MenuItem>Data Extraction</MenuItem>
-               <MenuItem>Manual Charges Accrual</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Vault Management">
-                <MenuItem>Clear cheques</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Allowance Transactions">
-              <MenuItem>Capture Direct Receipt</MenuItem>
-              <MenuItem>Group Statements</MenuItem>
-             </SubMenu>
-
-
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Loans">
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Loan Variations">
-
-              <MenuItem>Capture Reschedule</MenuItem>
-              <MenuItem>Approve Reschedule</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Default Loan Transfers">
+                  <MenuItem>Initiate Transfer to Guarantors</MenuItem>
+                  <MenuItem>Authorize Transfer to Guarantor</MenuItem>
+                </SubMenu>
 
               </SubMenu>
-              <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Debt Collection">
-               <MenuItem>Debt Collection Queue</MenuItem>
-               <MenuItem>Debt Collection Setup</MenuItem>
-             </SubMenu>
+              <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Accounts">
+                <MenuItem>Office Accounts</MenuItem>
+                <MenuItem>Office Journals</MenuItem>
+                <MenuItem>Account Statement</MenuItem>
+                <MenuItem>Cash Bank Setup</MenuItem>
 
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Budgetting">
+                  <MenuItem>Manage Budget Types</MenuItem>
+                  <MenuItem>Authorize Budget types</MenuItem>
+                  <MenuItem>Capture Budget</MenuItem>
+                  <MenuItem>Authorize Budget</MenuItem>
+                </SubMenu>
+                <MenuItem>Bank Reconciliation</MenuItem>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Accounts Transaction Reversal">
+                  <MenuItem>Capture Reversals</MenuItem>
+                  <MenuItem>Approve Revsersals</MenuItem>
+                </SubMenu>
 
-             <MenuItem>Loan view</MenuItem>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Collateral Management">
-             <MenuItem>Capture Collateral</MenuItem>
-             <MenuItem>Approve Collateral</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Group Applications">
-              <MenuItem>Application Register</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Loan Workflow stages ">
-             <MenuItem>Manage Stages</MenuItem>
-             <MenuItem>Authorize Stage Operations</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Facility WorkFlow Process">
-             <MenuItem>Capture Application</MenuItem>
-             <MenuItem>Appraise Application</MenuItem>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Application Disbursements">
-             <MenuItem>Capture Disbursement</MenuItem>
-             <MenuItem>Authorize Disbursement</MenuItem>
-             </SubMenu>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Facility Schedules">
-             <MenuItem>Create Schedules</MenuItem>
-             <MenuItem>Authorize Schedules</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Loan Write off">
-              <MenuItem>Capture Write Off</MenuItem>
-              <MenuItem>Approve Write Off</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Guarantor Administartion">
-             <MenuItem>Guarantor Release</MenuItem>
-             <MenuItem>Guarantor Authorization</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Mass Intrest Change">
-             <MenuItem>Capture Interest Charge</MenuItem>
-             <MenuItem>Authorise Interest Charge</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Facility Manual Billing">
-             <MenuItem>Capture Billing Options</MenuItem>
-             <MenuItem>Authorize Billing options</MenuItem>
-          
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Default Loan Transfers">
-             <MenuItem>Initiate Transfer to Guarantors</MenuItem>
-             <MenuItem>Authorize Transfer to Guarantor</MenuItem>
-             </SubMenu>
+                <MenuItem>Maintain GL Classes</MenuItem>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Financial Periods">
+                  <MenuItem>Manage Financial Periods</MenuItem>
+                  <MenuItem>Authorize Financial Periods</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<CardMembershipRoundedIcon className={iconClass} />} label="Project Management">
+                  <MenuItem>Define Project</MenuItem>
+                  <MenuItem>Authorize Project Definition</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<DescriptionIcon className={iconClass} />} label="Invoice Management">
+                  <MenuItem>Capture Invoice</MenuItem>
+                  <MenuItem>Authorize Invoice</MenuItem>
+                </SubMenu>
+                <MenuItem>Vendor Management</MenuItem>
+                <SubMenu icon={<DescriptionIcon className={iconClass} />} label="Allowance Configuration">
+                  <MenuItem>Configure Allowances</MenuItem>
+                  <MenuItem>Authorize Allowances</MenuItem>
+                </SubMenu>
+                <MenuItem>Channels Reconciliation</MenuItem>
+                <MenuItem>Channels Reconciliation B2C</MenuItem>
 
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Accounts">
-              <MenuItem>Office Accounts</MenuItem>
-              <MenuItem>Office Journals</MenuItem>
-              <MenuItem>Account Statement</MenuItem>
-              <MenuItem>Cash Bank Setup</MenuItem>
-              
-              <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Budgetting">
-               <MenuItem>Manage Budget Types</MenuItem>
-               <MenuItem>Authorize Budget types</MenuItem>
-               <MenuItem>Capture Budget</MenuItem>
-               <MenuItem>Authorize Budget</MenuItem>
-             </SubMenu>
-             <MenuItem>Bank Reconciliation</MenuItem>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Accounts Transaction Reversal">
-             <MenuItem>Capture Reversals</MenuItem>
-             <MenuItem>Approve Revsersals</MenuItem>
-             </SubMenu>
-      
-             <MenuItem>Maintain GL Classes</MenuItem>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Financial Periods">
-              <MenuItem>Manage Financial Periods</MenuItem>
-              <MenuItem>Authorize Financial Periods</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<CardMembershipRoundedIcon className={iconClass}  />} label="Project Management">
-              <MenuItem>Define Project</MenuItem>
-              <MenuItem>Authorize Project Definition</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<DescriptionIcon className={iconClass}  />} label="Invoice Management">
-             <MenuItem>Capture Invoice</MenuItem>
-             <MenuItem>Authorize Invoice</MenuItem>
-             </SubMenu>
-             <MenuItem>Vendor Management</MenuItem>
-             <SubMenu icon={<DescriptionIcon className={iconClass}  />} label="Allowance Configuration">
-              <MenuItem>Configure Allowances</MenuItem>
-              <MenuItem>Authorize Allowances</MenuItem>
-             </SubMenu>
-             <MenuItem>Channels Reconciliation</MenuItem>
-            <MenuItem>Channels Reconciliation B2C</MenuItem>
-
-             </SubMenu>
-             <SubMenu icon={<DescriptionIcon className={iconClass}  />} label="Reports">
-            <MenuItem>Report List</MenuItem>
-            <MenuItem>Custom Reports</MenuItem>
-            <MenuItem>User Defined Reports</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<EventBusyIcon className={iconClass}  />} label="End of Period">
-             <MenuItem>End of Day</MenuItem>
-             </SubMenu>
-             <SubMenu icon={<HomeRepairServiceIcon className={iconClass}  />} label="View">
-             <MenuItem>Change Password</MenuItem>
-             <MenuItem>Log Out Users</MenuItem>
-             </SubMenu>
-
-             <SubMenu icon={<HomeRepairServiceIcon className={iconClass}  />} label="Tools/Maintnance">
-              <MenuItem>System Charges</MenuItem>
-              <MenuItem>Savings Schemes</MenuItem>
-              <MenuItem>Shares Schemes</MenuItem>
-              <MenuItem>Tellers</MenuItem>
-              <MenuItem>Term Deposit Setup</MenuItem>
-              <MenuItem>Holidays</MenuItem>
-              <MenuItem>Transaction Codes</MenuItem>
-              <MenuItem>Branches</MenuItem>
-              <MenuItem>Membership Types</MenuItem>
-              <MenuItem>Sectors</MenuItem>
-              <MenuItem>Banks and Branches</MenuItem>
-              <MenuItem>Regions</MenuItem>
-              <MenuItem>Login Image</MenuItem>
-              <MenuItem>Employers</MenuItem>
-              <MenuItem>Administrative Locations</MenuItem>
-              <MenuItem>FinFinancials Parameters</MenuItem>
-              <MenuItem>Income Deduction Setup</MenuItem>
-              <MenuItem>Maintain Coinage</MenuItem>
-              <MenuItem>Maintain Teller Code</MenuItem>
-              <MenuItem>Statuory Deductions</MenuItem>
-              <MenuItem>Guarantor Parameterization</MenuItem>
-              <MenuItem>Facility Disbursement Options</MenuItem>
-              <SubMenu icon={<HomeRepairServiceIcon className={iconClass}  />} label="Channels Transaction Types">
-
-              <MenuItem>Add/Modify Transaction Types</MenuItem>
-              <MenuItem>Operation Authorization</MenuItem>
               </SubMenu>
-              <SubMenu icon={<HomeRepairServiceIcon className={iconClass}  />} label="Alert Types">
-              <MenuItem>Capture Alert Types</MenuItem>
+              <SubMenu icon={<DescriptionIcon className={iconClass} />} label="Reports">
+                <MenuItem>Report List</MenuItem>
+                <MenuItem>Custom Reports</MenuItem>
+                <MenuItem>User Defined Reports</MenuItem>
               </SubMenu>
-              <MenuItem>Manage ATM Cards</MenuItem>
-              <SubMenu icon={<HomeRepairServiceIcon className={iconClass}  />} label="Loan Eligibility">
-              <MenuItem>Define Eligibility Formular</MenuItem>
-              <MenuItem>Define Eligibility</MenuItem>
+              <SubMenu icon={<EventBusyIcon className={iconClass} />} label="End of Period">
+                <MenuItem>End of Day</MenuItem>
               </SubMenu>
-             </SubMenu>
-             <SubMenu icon={<SettingsSuggestIcon className={iconClass}  />} label="setup">
-             <MenuItem>General Setup</MenuItem>
-      
+              <SubMenu icon={<HomeRepairServiceIcon className={iconClass} />} label="View">
+                <MenuItem>Change Password</MenuItem>
+                <MenuItem>Log Out Users</MenuItem>
+              </SubMenu>
+
+              <SubMenu icon={<HomeRepairServiceIcon className={iconClass} />} label="Tools/Maintnance">
+                <MenuItem>System Charges</MenuItem>
+                <MenuItem>Savings Schemes</MenuItem>
+                <MenuItem>Shares Schemes</MenuItem>
+                <MenuItem>Tellers</MenuItem>
+                <MenuItem>Term Deposit Setup</MenuItem>
+                <MenuItem>Holidays</MenuItem>
+                <MenuItem>Transaction Codes</MenuItem>
+                <MenuItem>Branches</MenuItem>
+                <MenuItem>Membership Types</MenuItem>
+                <MenuItem>Sectors</MenuItem>
+                <MenuItem>Banks and Branches</MenuItem>
+                <MenuItem>Regions</MenuItem>
+                <MenuItem>Login Image</MenuItem>
+                <MenuItem>Employers</MenuItem>
+                <MenuItem>Administrative Locations</MenuItem>
+                <MenuItem>FinFinancials Parameters</MenuItem>
+                <MenuItem>Income Deduction Setup</MenuItem>
+                <MenuItem>Maintain Coinage</MenuItem>
+                <MenuItem>Maintain Teller Code</MenuItem>
+                <MenuItem>Statuory Deductions</MenuItem>
+                <MenuItem>Guarantor Parameterization</MenuItem>
+                <MenuItem>Facility Disbursement Options</MenuItem>
+                <SubMenu icon={<HomeRepairServiceIcon className={iconClass} />} label="Channels Transaction Types">
+
+                  <MenuItem>Add/Modify Transaction Types</MenuItem>
+                  <MenuItem>Operation Authorization</MenuItem>
+                </SubMenu>
+                <SubMenu icon={<HomeRepairServiceIcon className={iconClass} />} label="Alert Types">
+                  <MenuItem>Capture Alert Types</MenuItem>
+                </SubMenu>
+                <MenuItem>Manage ATM Cards</MenuItem>
+                <SubMenu icon={<HomeRepairServiceIcon className={iconClass} />} label="Loan Eligibility">
+                  <MenuItem>Define Eligibility Formular</MenuItem>
+                  <MenuItem>Define Eligibility</MenuItem>
+                </SubMenu>
+              </SubMenu>
+              <SubMenu icon={<SettingsSuggestIcon className={iconClass} />} label="setup">
+                <MenuItem>General Setup</MenuItem>
+
+              </SubMenu>
+              <SubMenu icon={<HomeRepairServiceIcon className={iconClass} />} label="Financial Instruments">
+                <MenuItem>Capture Contract</MenuItem>
+                <MenuItem>Capture Schedule</MenuItem>
+              </SubMenu>
             </SubMenu>
-            <SubMenu icon={<HomeRepairServiceIcon className={iconClass}  />} label="Financial Instruments">
-            <MenuItem>Capture Contract</MenuItem>
-              <MenuItem>Capture Schedule</MenuItem>
-             </SubMenu>
-             </SubMenu>
-      
+
 
 
             {/* Submenu for Fixed Assets */}
@@ -385,7 +445,7 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   ) : null}
                 </div>
               }
-              onClick={() => handleSubMenuClick("FixedAssets")}
+              onClick={() => handleSubMenuClick("FixedAssets", 0)}
             >
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Asset Register</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Depreciation</MenuItem>
@@ -409,9 +469,9 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   ) : null}
                 </div>
               }
-              onClick={() => handleSubMenuClick("Inventory")}
+              onClick={() => handleSubMenuClick("Inventory", 0)}
             >
-               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stock Request</MenuItem>
+              <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stock Request</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stores</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Purchases</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Stock Items</MenuItem>
@@ -434,7 +494,7 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   ) : null}
                 </div>
               }
-              onClick={() => handleSubMenuClick("FileTracker")}
+              onClick={() => handleSubMenuClick("FileTracker", 0)}
             >
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Managment</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>File Movement</MenuItem>
@@ -459,9 +519,9 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   ) : null}
                 </div>
               }
-              onClick={() => handleSubMenuClick("HumanResource")}
+              onClick={() => handleSubMenuClick("HumanResource", 0)}
             >
-             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Employee Details</MenuItem>
+              <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Employee Details</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Leave</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Hr Setup</MenuItem>
             </SubMenu>
@@ -481,7 +541,7 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   ) : null}
                 </div>
               }
-              onClick={() => handleSubMenuClick("Payroll")}
+              onClick={() => handleSubMenuClick("Payroll", 0)}
             >
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Payroll Setup</MenuItem>
 
@@ -502,9 +562,9 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   ) : null}
                 </div>
               }
-              onClick={() => handleSubMenuClick("GlobalAdministration")}
+              onClick={() => handleSubMenuClick("GlobalAdministration", 0)}
             >
-             <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Global Setup</MenuItem>
+              <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Global Setup</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Impact Data</MenuItem>
             </SubMenu>
 
@@ -525,7 +585,7 @@ const SideBar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   ) : null}
                 </div>
               }
-              onClick={() => handleSubMenuClick("ConsolidatedReports")}
+              onClick={() => handleSubMenuClick("ConsolidatedReports", 0)}
             >
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Cosolidated Reports List</MenuItem>
               <MenuItem icon={<PeopleOutlinedIcon className={iconClass} />}>Maintain Reports Mapping</MenuItem>

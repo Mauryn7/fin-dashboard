@@ -40,7 +40,7 @@ function Home() {
 
                 </div>
                 {/* our content  */}
-                {slug === "Dashboard" ? <Dashboard/>: ""}
+                {/* {slug === "Dashboard" ? <Dashboard/>: ""} */}
 
             </main>
         </div>
