@@ -21,32 +21,7 @@ const page = () => {
   return (
     <div style={{ height: "auto" }}>
       <main className='min-h-screen bg-[#ededed] lg:mx-20 sm:mx-0'>
-        <div className='flex flex-col justify-between  p-2'>
-          <div className='relative text-2xl capitalize rounded-md px-4'>
-
-            <Breadcrumbs aria-label="breadcrumb">
-
-              <h2 color="text.primary">
-                {slug === undefined ? (
-                  <Link href={`/`}>
-                  /Dashboard
-                </Link>
-                ): (
-                  <Link href={`/${slug}`}>
-                  {slug}
-                </Link>
-                )}
-               
-              </h2>
-
-            </Breadcrumbs>
-          </div>
-          <div className='flex mt-4'>
-            <p className='capitalize text-gray- px-4'>Welcome Back</p>
-
-          </div>
-
-        </div>
+        
         {/* our content  */}
         {slug === undefined ? <Dashboard/>: ""}
 

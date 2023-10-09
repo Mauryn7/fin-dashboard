@@ -76,7 +76,7 @@ export default function Navbar() {
                 <MenuIcon  className={iconstyle}/>
               </IconButton>
              
-          
+
           
           
           {auth && (

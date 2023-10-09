@@ -16,6 +16,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
 import { styled, useTheme } from '@mui/material/styles';
 import SideBar from './SideBar';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 type Anchor = 'left';
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -109,11 +110,12 @@ export default function TemporaryDrawer() {
         <React.Fragment key={anchor}>
          
           
-          <Drawer
+          <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}
             className='fixed'
-            // onClose={toggleDrawer(anchor, false)}
+            onOpen={toggleDrawer(anchor, true)}
+            onClose={toggleDrawer(anchor, false)}
           >
          
               <DrawerHeader>
@@ -126,7 +128,7 @@ export default function TemporaryDrawer() {
         </DrawerHeader>
         <Divider className='mb-4'/>
             <SideBar/>
-          </Drawer>
+          </SwipeableDrawer>
         </React.Fragment>
       ))}
     </div>
