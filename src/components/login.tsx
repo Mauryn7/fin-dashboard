@@ -57,7 +57,7 @@ function Login() {
                 <option value="TV">en</option>
               </select>
             </div>
-            <Link href="/Dashboard">
+            <Link href="/">
             <button className='bg-[#1F5780] rounded-md p-3 sm:col-span-2 w-full text-white' type="submit">Login</button>
             </Link>
           </form>

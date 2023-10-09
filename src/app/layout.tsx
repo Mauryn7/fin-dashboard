@@ -31,7 +31,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-    {children}
+      <section className="bg-[#ededed]">
+        {/* wrapp everything with my side bar */}
+        <ProSidebarProvider>
+          <SideBarProvider>
+          <Dashlayout> 
+          <TemporaryDrawer/>
+            {children}
+          </Dashlayout>
+          </SideBarProvider>
+        </ProSidebarProvider>
+  
+        </section>
     </body>
     </html>
   )

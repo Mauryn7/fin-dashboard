@@ -46,8 +46,12 @@ export default function Navbar() {
 
   const handleClose = () => {
     setAnchorEl(null);
-    router.push('/login')
+   
   };
+  const handleLogout=()=>{
+    setAnchorEl(null);
+    router.push('/Login')
+  }
   
   const iconstyle="black"
   const {state, setState} = React.useContext(SideBarContext)
@@ -165,7 +169,7 @@ export default function Navbar() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Log out</MenuItem>
+                <MenuItem onClick={handleLogout}>Log out</MenuItem>
               </Menu>
             </div>
           )}
