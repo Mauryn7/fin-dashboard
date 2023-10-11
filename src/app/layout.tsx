@@ -40,30 +40,31 @@ export default function RootLayout({
                 <TemporaryDrawer />
                 <div className='lg:mx-20 sm:mx-0'>
 
-                
-                <div className='relative text-2xl capitalize rounded-md  px-4 py-2'>
 
-                  <Breadcrumbs aria-label="breadcrumb">
+                  <div className='relative text-2xl capitalize rounded-md  px-4 py-2'>
 
-                    <h2 color="text.primary mt-2">
-                      {pathname === "/" ? (
-                        <Link href={`/`}>
-                          /Dashboard
-                        </Link>
-                      ) : (
-                        <Link href={`${pathname}`}>
-                          {pathname}
-                        </Link>
-                      )}
+                    <Breadcrumbs aria-label="breadcrumb">
 
-                    </h2>
+                      <h2 color="text.primary mt-2">
+                        {pathname === "/" ? (
+                          <Link href={`/`}>
+                            /Dashboard
+                          </Link>
+                        ) : (
+                          <Link href={`${pathname}`}>
+                            {pathname}
+                          </Link>
+                        )}
 
-                  </Breadcrumbs>
-                </div>
-                <div className='flex mt-4'>
-                  <p className='capitalize text-gray- px-4'>Welcome Back</p>
+                      </h2>
 
-                </div>
+                    </Breadcrumbs>
+                  </div>
+                  <div className='flex  justify-between items-center mt-4 px-4'>
+                    <h2 className='font-bold text-2xl'>{pathname === '/'? "Main Dashboard" : pathname.split("/")[-1]}</h2>
+                    <p className='capitalize text-gray- px-4'>Welcome Back</p>
+
+                  </div>
                 </div>
 
                 {children}

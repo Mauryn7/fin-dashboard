@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -9,43 +9,41 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Collapse from '@mui/material/Collapse';
 import StarBorder from '@mui/icons-material/StarBorder';
-const SideBar = () => {
-  const [open, setOpen] = React.useState(true);
+import SubSideBar from './subsidebar/SubSideBar';
+
+interface MenuData {
+  title: string;
+}
+
+const SideBar: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState<MenuData[] | null>(null);
 
   const handleClick = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    fetch("http://200126984.cs2410-web01pvm.aston.ac.uk/react-amazon-navbar/")
+      .then((data) => data.json())
+      .then((response: MenuData[]) => setMenu(response));
+  }, []);
+
   return (
     <div>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {menu &&
+          menu.map((text: MenuData, index: number) => (
+            <h2 className='px-5 py-5 font-semibold' onClick={handleClick}>
+              {text.title}
+              {open && <SubSideBar />}
+            </h2>
+          ))}
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-            
-          </ListItem>
-         
-        ))}
-      </List>
+      {open && <SubSideBar />}
     </div>
-  )
-}
+  );
+};
 
-export default SideBar
+export default SideBar;
