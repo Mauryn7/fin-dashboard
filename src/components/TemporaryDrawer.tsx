@@ -119,7 +119,7 @@ export default function TemporaryDrawer() {
           >
          
               <DrawerHeader>
-              <div className='pl-4 uppercase text-2xl font-bold'>
+              <div className='px-4 uppercase text-2xl font-bold'>
             finfinancials
           </div>
           <IconButton  onClick={handleDrawerClose}>
